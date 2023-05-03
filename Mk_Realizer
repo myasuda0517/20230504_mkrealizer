@@ -1,0 +1,29 @@
+desc:Mk Realizer (experimental)
+//tags: utility
+//author: Masanori Yasuda
+
+slider1:0<-0.5,10,0.01>Amount
+slider2:0<-0.5,1,0.01>Adjust Amount
+
+in_pin:left input
+in_pin:right input
+out_pin:left output
+out_pin:right output
+
+@init
+pass = 0;
+l_1 = 0;
+r_1 = 0;
+
+@slider
+amount = slider1 + slider2;
+
+@sample
+l_1 = l_0;
+r_1 = r_0;
+
+l_0 = spl0;
+r_0 = spl1;
+
+spl0 = l_0 + (l_0 - l_1) * amount; 
+spl1 = r_0 + (r_0 - r_1) * amount;
